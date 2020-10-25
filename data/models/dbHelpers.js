@@ -36,5 +36,10 @@ async function deleteId(id) {
 }
 
 async function updateId(id, changes) {
-  return await db('accounts').where({ id }).update(changes);
+  const response = await db('accounts')
+    .where({ id })
+    .update(changes)
+    .then(() => findById(id));
+  console.log('RESPONSE:', response);
+  return response;
 }
